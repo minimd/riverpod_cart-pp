@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_files/models/product.dart';
@@ -20,7 +20,7 @@ class CartNotifier extends _$CartNotifier {
   }
 
   void addProduct(Product product) {
-    //this if check if the state(the card items) already contains the product. if not, it adds the product to the state.
+    //this if check if the state(the cart items) already contains the product. if not, it adds the product to the state.
     if (!state.contains(product)) {
       //if thie statement is met. i want the state to be updated.. the state now should be the old state + the new product.
       //seems like the word state is a preDefined term in flutter that refers to the current state of the widget.
@@ -35,7 +35,7 @@ class CartNotifier extends _$CartNotifier {
     if (state.contains(product)) {
       //notice the beuty of the code here. i am creating a new set by filtering out the product that was removed.
       //state as we mentiond is a 'Set' of products. hence the toSet() method converts the ITERABLE back to a set.
-      state = state.where((p) => p.id != product.id).toSet();
+      state = state.where((x) => x.id != product.id).toSet();
     }
   }
 }

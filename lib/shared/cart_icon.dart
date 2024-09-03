@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_files/providers/cart_provider.dart';
 import 'package:riverpod_files/screens/cart/cart_screen.dart';
 
-class CartIcon extends StatelessWidget {
+//this file is a wholesome example of what we have done.. let me explain
+//this whole file is about the shopping bag logo up in the right corner
+//whenever you click add item. there is no event listener that is triggered..
+//instead. the provider value changes.. and as we have a champion consumer widget instead of a nor
+
+class CartIcon extends ConsumerWidget {
   const CartIcon({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final numberOdItems = ref.watch(cartNotifierProvider).length;
     return Stack(
       children: [
         IconButton(
@@ -25,8 +33,9 @@ class CartIcon extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              color: Colors.blueAccent,
+              color: const Color.fromARGB(255, 231, 39, 39),
             ),
+            child: Text(numberOdItems.toString(), style: const TextStyle(color: Colors.white) ,),
           ),
         ),
       ],
